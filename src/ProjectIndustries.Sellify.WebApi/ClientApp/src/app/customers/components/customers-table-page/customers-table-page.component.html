@@ -1,0 +1,70 @@
+<header class="Page-header">
+  <h1 class="Page-title">Customers</h1>
+
+  <div class="Customers-filters">
+    <div class="Customers-filterControls">
+      <app-period-picker
+        (startAtChange)="pushStartAt($event)"
+        (periodChange)="pushPeriod($event)"
+        [startAt]="startAt$ | async"
+        [period]="period$ | async"
+      ></app-period-picker>
+    </div>
+  </div>
+</header>
+
+
+<div class="Customers-content Page-content">
+  <div class="Customers-tableWrap">
+    <app-expandable-table
+      (expandToggled)="toggleDetails($event.expanded, $event.data)"
+      [expandedRowTmpl]="expandRowTmpl"
+      [dataSource]="customersDataSource"
+      [columns]="columns"
+      itemSize="50"
+      [trackBy]="trackById"
+      tableClass="CustomersTable"
+    ></app-expandable-table>
+  </div>
+</div>
+
+<ng-template #actionsColTmpl let-row>
+  <button class="Button is-primary is-small">
+    Message
+  </button>
+</ng-template>
+
+<ng-template #toolbarSearchTmpl>
+  <app-search-bar
+    (valueChange)="pushSearchToRoute($event)"
+    [value]="customersDataSource.search$ | async"
+    placeholder="Search Customers..."
+    class="Toolbar-globalSearch"
+  ></app-search-bar>
+</ng-template>
+
+
+<ng-template #createOrderTmpl>
+  <button class="Button is-primary is-block">Create new order</button>
+</ng-template>
+
+<ng-template #expandRowTmpl let-row>
+  <ng-container *ngIf="this.purchasedOrdersDataSource.customerId$ | async">
+    <p-progressSpinner
+      *ngIf="purchasedOrdersDataSource.isLoading$ | async"
+      class="AppProgressSpinner"
+    ></p-progressSpinner>
+    <cdk-virtual-scroll-viewport [itemSize]="31" style="height: 100px;">
+      <table class="CustomerDetailsTable">
+        <tr *cdkVirtualFor="let d of purchasedOrdersDataSource">
+          <td>{{d.title}}</td>
+          <td>{{d.paidAt | datetimeHumanize}}</td>
+          <td>${{d.price * d.quantity}}</td>
+          <td>{{d.orderStatus}}</td>
+        </tr>
+      </table>
+      <div *ngIf="purchasedOrdersDataSource.noData$ | async" class="NoDataAlert">No data to show</div>
+    </cdk-virtual-scroll-viewport>
+  </ng-container>
+
+</ng-template>

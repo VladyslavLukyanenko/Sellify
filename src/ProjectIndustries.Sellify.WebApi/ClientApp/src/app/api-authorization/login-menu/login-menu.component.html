@@ -1,0 +1,28 @@
+<ng-container *ngIf="isAuthenticated | async">
+  <div
+    *ngIf="user$ | async as user"
+    (click)="loggedInMenu.toggle($event)"
+    class="ManageButton"
+    title="Manage"
+  >
+    <img [src]="user.pic" [alt]="user.fname" class="ManageButton-pic">
+    <span class="ManageButton-details">
+      <span class="ManageButton-name">{{user.fname}} {{user.lname}}</span>
+      <span class="ManageButton-plan">{{user.plan}} Plan</span>
+    </span>
+
+    <svg style="width: 12px;height: 9px;" class="ManageButton-menuArrow">
+      <use href="#angle-down"></use>
+    </svg>
+  </div>
+</ng-container>
+<ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">
+  <li class="nav-item">
+    <a class="nav-link text-dark" [routerLink]='["/authentication/register"]'>Register</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" [routerLink]='["/authentication/login"]'>Login</a>
+  </li>
+</ul>
+
+<p-menu #loggedInMenu [popup]="true" [model]="loggedInMenuItems" class="StdMenu" appendTo="body" styleClass="StdMenu UserProfileMenu"></p-menu>

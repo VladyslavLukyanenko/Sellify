@@ -1,0 +1,39 @@
+<div [formGroup]="form" class="AppForm-row row">
+  <div class="AppForm-col col-12 col-md-3">
+    <div class="AppForm-field">
+      <label class="AppForm-label">Type</label>
+      <p-dropdown
+        appendTo="body"
+        formControlName="type"
+        class="AppForm-control"
+        optionValue="value"
+        optionLabel="key"
+        [options]="types"
+        [autoDisplayFirst]="false"
+      ></p-dropdown>
+      <app-field-error-required [control]="form.typeCtrl"></app-field-error-required>
+    </div>
+  </div>
+  <div class="AppForm-col col-12 col-md-4">
+    <div class="AppForm-field">
+      <label class="AppForm-label">Name</label>
+      <input type="text" formControlName="name" class="AppForm-control" placeholder="Name">
+      <app-field-error-required [control]="form.nameCtrl"></app-field-error-required>
+    </div>
+  </div>
+  <div class="AppForm-col col-12 col-md-4">
+    <div class="AppForm-field">
+      <label class="AppForm-label">Value</label>
+      <input type="text" formControlName="value" class="AppForm-control" placeholder="Value">
+      <app-field-error-required [control]="form.valueCtrl"></app-field-error-required>
+    </div>
+  </div>
+  <div class="AppForm-col col-12 col-md-1">
+    <div class="AppForm-field">
+      <label class="AppForm-label">&nbsp;</label>
+      <button (click)="removeClick.emit()" class="ButtonIcon ProductAttributeEditor-removeBtn" type="button">
+        <i class="pi pi-trash ProductAttributeEditor-removeIcon"></i>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+:host {
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.ExpandableTable {
+  width: 100%;
+  height: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+
+  &-header {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.2px;
+    color: #298BFF;
+    text-align: left;
+    padding: 0 12px 12px;
+    text-transform: capitalize;
+  }
+
+  &-dataRow {
+    cursor: pointer;
+  }
+
+  &-dataCol {
+    background: rgba(41, 139, 255, 0.08);
+    text-align: left;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -0.2px;
+    color: #0078FF;
+    padding: 0 12px;
+    position: relative;
+    z-index: 1;
+    height: 41px;
+
+    &:first-child {
+      border-top-left-radius: 7px;
+      border-bottom-left-radius: 7px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 7px;
+    }
+  }
+
+
+  &-checkCol {
+    width: 44px;
+    text-align: center;
+  }
+
+  &-idCol {
+    width: 70px;
+  }
+
+  &-dateCol {
+    width: 160px;
+  }
+
+  &-customerCol {
+  }
+
+  &-productCol {
+  }
+
+  &-totalCol {
+    width: 120px;
+  }
+
+  &-statusCol {
+    width: 100px;
+  }
+
+  &-detailsRow {
+  }
+
+  &-detailsCol {
+    position: relative;
+    height: 8px;
+    transition: .3s height, .3s opacity;
+    opacity: 0;
+    padding: 0;
+    font-size: 0;
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -41px;
+      border-radius: 7px;
+      bottom: 8px;
+      transition: 1s background-color;
+    }
+
+    &.is-expanded {
+      min-height: 150px;
+      opacity: 1;
+
+      &:after {
+        background: rgba(41, 139, 255, 0.08);
+      }
+    }
+  }
+}
+
+.ExpandedDetails {
+  padding: 24px 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.CheckLike {
+  width: 19px;
+  height: 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 3px;
+}

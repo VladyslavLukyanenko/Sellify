@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2015E4A8-3B16-472C-9F6E-B9C02D612740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectIndustries.Sellify.LandingPage", "src\ProjectIndustries.Sellify.LandingPage\ProjectIndustries.Sellify.LandingPage.csproj", "{B7CEEE79-24FC-42C5-98F8-256A6903701A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectIndustries.Sellify.Core", "src\ProjectIndustries.Sellify.Core\ProjectIndustries.Sellify.Core.csproj", "{698AE27C-6C3F-4BC1-85E7-9F7E337B5038}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectIndustries.Sellify.App", "src\ProjectIndustries.Sellify.App\ProjectIndustries.Sellify.App.csproj", "{62648A1D-2614-47DD-B299-7228412DC4F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectIndustries.Sellify.Infra", "src\ProjectIndustries.Sellify.Infra\ProjectIndustries.Sellify.Infra.csproj", "{B63BECE1-B3DC-4E20-BFAB-EC7BB8BC9846}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectIndustries.Sellify.WebApi", "src\ProjectIndustries.Sellify.WebApi\ProjectIndustries.Sellify.WebApi.csproj", "{FF31F525-BC84-48FE-90C3-5110A0D337CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayPal.SDK", "src\PayPal.SDK\PayPal.SDK.csproj", "{28D41797-AC1C-4114-8067-BCE8EDD28F43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B7CEEE79-24FC-42C5-98F8-256A6903701A} = {2015E4A8-3B16-472C-9F6E-B9C02D612740}
+		{FF31F525-BC84-48FE-90C3-5110A0D337CE} = {2015E4A8-3B16-472C-9F6E-B9C02D612740}
+		{B63BECE1-B3DC-4E20-BFAB-EC7BB8BC9846} = {2015E4A8-3B16-472C-9F6E-B9C02D612740}
+		{62648A1D-2614-47DD-B299-7228412DC4F8} = {2015E4A8-3B16-472C-9F6E-B9C02D612740}
+		{698AE27C-6C3F-4BC1-85E7-9F7E337B5038} = {2015E4A8-3B16-472C-9F6E-B9C02D612740}
+		{28D41797-AC1C-4114-8067-BCE8EDD28F43} = {2015E4A8-3B16-472C-9F6E-B9C02D612740}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7CEEE79-24FC-42C5-98F8-256A6903701A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7CEEE79-24FC-42C5-98F8-256A6903701A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7CEEE79-24FC-42C5-98F8-256A6903701A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7CEEE79-24FC-42C5-98F8-256A6903701A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698AE27C-6C3F-4BC1-85E7-9F7E337B5038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698AE27C-6C3F-4BC1-85E7-9F7E337B5038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698AE27C-6C3F-4BC1-85E7-9F7E337B5038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698AE27C-6C3F-4BC1-85E7-9F7E337B5038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62648A1D-2614-47DD-B299-7228412DC4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62648A1D-2614-47DD-B299-7228412DC4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62648A1D-2614-47DD-B299-7228412DC4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62648A1D-2614-47DD-B299-7228412DC4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63BECE1-B3DC-4E20-BFAB-EC7BB8BC9846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63BECE1-B3DC-4E20-BFAB-EC7BB8BC9846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63BECE1-B3DC-4E20-BFAB-EC7BB8BC9846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63BECE1-B3DC-4E20-BFAB-EC7BB8BC9846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF31F525-BC84-48FE-90C3-5110A0D337CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF31F525-BC84-48FE-90C3-5110A0D337CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF31F525-BC84-48FE-90C3-5110A0D337CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF31F525-BC84-48FE-90C3-5110A0D337CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28D41797-AC1C-4114-8067-BCE8EDD28F43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28D41797-AC1C-4114-8067-BCE8EDD28F43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28D41797-AC1C-4114-8067-BCE8EDD28F43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28D41797-AC1C-4114-8067-BCE8EDD28F43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

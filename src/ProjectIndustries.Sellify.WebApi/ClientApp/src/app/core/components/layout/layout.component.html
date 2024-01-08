@@ -1,0 +1,22 @@
+﻿<app-sidebar (navigated)="isSidebarOpened$.next(false)" class="Layout-sidebar"></app-sidebar>
+<p-sidebar
+  (visibleChange)="isSidebarOpened$.next($event)"
+  [visible]="isSidebarOpened$ | async"
+  [style]="{padding: 0, height: '100%', minHeight: 0, overflow: 'auto'}"
+  class="Layout-sidebarMobile"
+  [showCloseIcon]="false"
+  [baseZIndex]="1000"
+>
+  <app-sidebar (navigated)="isSidebarOpened$.next(false)"></app-sidebar>
+</p-sidebar>
+<div class="Layout-wrap">
+  <app-toolbar
+    (sidebarOpenedChange)="isSidebarOpened$.next($event)"
+    [sidebarOpened]="isSidebarOpened$ | async"
+    class="Layout-toolbar"
+  ></app-toolbar>
+  <div class="Layout-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

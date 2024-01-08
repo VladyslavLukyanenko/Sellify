@@ -1,0 +1,87 @@
+<header class="Page-header">
+  <h1 class="Page-title">Products</h1>
+
+  <div class="Products-filters">
+    <div class="Products-filterControls">
+      <button type="button" class="StdButton" (click)="sortMenu.toggle($event)" style="min-width: 120px;">
+        All time
+        <svg style="width: 12px;height: 9px;">
+          <use href="#angle-down"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<p-menu #sortMenu [popup]="true" [model]="supportedSortOptions" class="StdMenu"></p-menu>
+<div class="Products-content Page-content">
+  <div class="Products-tableWrap">
+    <app-expandable-table
+      [multiSelect]="false"
+      [dataSource]="productsDataSource"
+      [columns]="columns"
+      itemSize="50"
+      [trackBy]="trackById"
+      tableClass="ProductsTable"
+    ></app-expandable-table>
+  </div>
+</div>
+
+<ng-template #actionsColTmpl let-row>
+  <div class="ButtonLike is-primary">
+    <a (click)="$event.preventDefault();edit(row)" href="#" class="ButtonIcon is-slim pr-2">
+      <img src="../../../../assets/icons/pencil.svg" alt="Edit this product" style="height: 11px;">
+    </a>
+    <a (click)="$event.preventDefault();confirmRemoval(row)" href="#" class="ButtonIcon is-slim">
+      <img src="../../../../assets/icons/trash.svg" alt="Remote this product" style="height: 12px;">
+    </a>
+  </div>
+</ng-template>
+
+<ng-template #productTitleColTmpl let-row>
+  <div class="ProductCol">
+    <div class="ProductCol-pic" [style.backgroundImage]="sanitizePictureUrl(row.picture)"></div>
+    <div class="ProductCol-desc">
+      <div class="ProductCol-title">{{row.title}}</div>
+      <div class="ProductCol-excerpt">{{row.excerpt}}</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #categoriesColTmpl let-row>
+  <div class="CategoryBadge">
+    <span class="CategoryBadge-name">{{row.category}}</span>
+  </div>
+</ng-template>
+
+<ng-template #toolbarSearchTmpl>
+  <app-search-bar
+    (valueChange)="pushSearchToRoute($event)"
+    [value]="productsDataSource.search$ | async"
+    placeholder="Search Products..."
+    class="Toolbar-globalSearch"
+  ></app-search-bar>
+</ng-template>
+
+<ng-template #createProductTmpl>
+  <button (click)="isEditorDialogVisible$.next(true)" class="Button is-primary is-block">Create new product</button>
+</ng-template>
+
+<app-product-editor-dialog
+  *ngIf="isEditorDialogVisible$ | async as isVisible"
+  (isVisibleChange)="isEditorDialogVisible$.next($event)"
+  (saved)="refresh()"
+  [isVisible]="isVisible"
+  [productId]="selectedProductId"
+></app-product-editor-dialog>
+
+
+<app-confirm-dialog
+  (confirmed)="remove()"
+  (isVisibleChange)="isRemoveDialogVisible$.next($event)"
+  [isVisible]="isRemoveDialogVisible$ | async"
+  type="danger"
+  title="Are you sure?"
+  message="If deleted, you will not be able to recover the product again."
+  confirmText="Delete Product"
+></app-confirm-dialog>

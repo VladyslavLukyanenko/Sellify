@@ -1,0 +1,29 @@
+﻿<div class="Toolbar-sidebarToggle">
+  <button
+    (click)="sidebarOpenedChange.emit(!sidebarOpened)"
+    class="ButtonIcon"
+  >
+    <i class="pi pi-bars"></i>
+  </button>
+</div>
+<div class="Toolbar-extra">
+  <ng-template [cdkPortalOutlet]="layoutService.toolbarExtraSpacePortal$ | async"></ng-template>
+</div>
+
+<ul class="ToolboxButtons">
+  <li class="ToolboxButtons-item has-badge">
+    <button class="ToolboxButtons-button">
+      <img src="../../../../assets/icons/notification.svg" alt="Notifications button" class="ToolboxButtons-icon">
+    </button>
+    <span class="ToolboxButtons-badge">9</span>
+  </li>
+  <li class="ToolboxButtons-item has-badge">
+    <button class="ToolboxButtons-button">
+      <img src="../../../../assets/icons/email.svg" alt="Notifications button" class="ToolboxButtons-icon">
+    </button>
+    <span class="ToolboxButtons-badge">4</span>
+  </li>
+  <li class="ToolboxButtons-item ToolboxButtons-loginMenu">
+    <app-login-menu></app-login-menu>
+  </li>
+</ul>

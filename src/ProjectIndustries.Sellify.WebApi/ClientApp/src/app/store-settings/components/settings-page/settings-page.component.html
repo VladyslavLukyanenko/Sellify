@@ -1,0 +1,135 @@
+<header class="Page-header">
+  <h1 class="Page-title">Store Settings</h1>
+
+  <div class="StoreSettings-filters">
+    <div class="StoreSettings-filterControls">
+      <button
+        (click)="isAddWebhookDialogVisible$.next(true)"
+        type="button"
+        class="Button is-primary"
+        style="min-width: 120px;"
+      >
+        Add a webhook
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<div class="StoreSettings-content Page-content">
+  <div class="StoreSettings-tableWrap">
+    <app-expandable-table
+      [multiSelect]="false"
+      [dataSource]="webhooksDataSource"
+      [columns]="columns"
+      itemSize="50"
+      [trackBy]="trackById"
+      tableClass="StoreSettingsTable"
+    ></app-expandable-table>
+  </div>
+</div>
+
+<ng-template #actionsColTmpl let-row>
+  <div class="ButtonLike">
+    <a (click)="$event.preventDefault();edit(row);" href="#" class="ButtonIcon is-slim pr-2">
+      <img src="../../../../assets/icons/pencil.svg" alt="Edit this webhook" style="height: 11px;">
+    </a>
+    <a (click)="$event.preventDefault();confirmRemove(row);" href="#" class="ButtonIcon is-slim">
+      <img src="../../../../assets/icons/trash-alt.svg" alt="Remote this webhook" style="height: 12px;">
+    </a>
+  </div>
+</ng-template>
+
+<ng-template #toolbarSearchTmpl>
+  <app-search-bar
+    (valueChange)="pushSearchToRoute($event)"
+    [value]="webhooksDataSource.search$ | async"
+    placeholder="Search web hooks..."
+    class="Toolbar-globalSearch"
+  ></app-search-bar>
+</ng-template>
+
+
+<ng-template #createOrderTmpl>
+  <button class="Button is-primary is-block">Create new order</button>
+</ng-template>
+
+
+<app-confirm-dialog
+  (confirmed)="remove()"
+  (isVisibleChange)="isRemoveDialogVisible$.next($event)"
+  [isVisible]="isRemoveDialogVisible$ | async"
+  type="danger"
+  title="Are you sure?"
+  message="If deleted, you will not be able to recover the webhook again."
+  confirmText="Delete Webhook"
+></app-confirm-dialog>
+
+<form (ngSubmit)="saveBinding()" [formGroup]="form" class="AppForm">
+  <p-dialog
+    *ngIf="isAddWebhookDialogVisible$ | async as isVisible"
+    (visibleChange)="isAddWebhookDialogVisible$.next($event)"
+    [visible]="isVisible"
+    [modal]="true"
+    [dismissableMask]="true"
+    styleClass="AppDialog AddWebhookDialog dialogHeaderIconless"
+  >
+    <ng-template pTemplate="header">
+      <div class="AppDialog-header">
+        <h2 class="AppDialog-title">
+          Add New Webhook
+        </h2>
+      </div>
+    </ng-template>
+
+    <div class="AppDialog-content AddWebhookDialog-content">
+      <div class="AppForm-row has-noGutters">
+        <div class="AppForm-field">
+          <label for="webhookUrl" class="AppForm-label">Webhook URL</label>
+          <input
+            formControlName="listenerEndpoint"
+            type="text"
+            name="webhookUrl"
+            id="webhookUrl"
+            class="AppForm-control"
+            placeholder="Webhook URL">
+        </div>
+      </div>
+      <div class="AppForm-row has-noGutters">
+        <div class="AppForm-field">
+          <label class="AppForm-label">Select Events</label>
+          <p-dropdown
+            formControlName="eventType"
+            [options]="events$ | async"
+            [autoDisplayFirst]="false"
+            class="AppForm-control"
+            appendTo="body"
+            optionLabel="key"
+            optionValue="value"
+          ></p-dropdown>
+        </div>
+      </div>
+      <div class="AppForm-row has-noGutters">
+        <div class="AppForm-field">
+          <label class="AppForm-label">Site</label>
+          <p-dropdown
+            formControlName="receiverType"
+            [options]="receiverTypes"
+            [autoDisplayFirst]="false"
+            optionLabel="key"
+            optionValue="value"
+            class="AppForm-control"
+            appendTo="body"
+          ></p-dropdown>
+        </div>
+      </div>
+
+    </div>
+
+    <p-footer>
+      <button [disabled]="isLoading$ | async" class="AppDialog-btn is-primary AddWebhookDialog-btn">
+        Add webhook
+      </button>
+    </p-footer>
+  </p-dialog>
+</form>

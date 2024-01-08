@@ -1,0 +1,59 @@
+﻿{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft.Hosting.Lifetime": "Information",
+        "Elastic.Apm": "Error",
+        "Microsoft.AspNetCore": "Warning",
+        "IdentityServer4": "Warning",
+        "EFCoreSecondLevelCacheInterceptor": "Debug",
+        "Microsoft.EntityFrameworkCore.Infrastructure": "Warning",
+        "Microsoft.EntityFrameworkCore": "Information",
+        "ProjectIndustries": "Verbose"
+      }
+    },
+    "Using": [
+      "Serilog.Enrichers.ClientInfo"
+    ],
+    "Enrich": [
+      "FromLogContext",
+      "WithMachineName",
+      "WithProcessId",
+      "WithThreadId",
+      "WithClientIp",
+      "WithClientAgent",
+      "WithMemoryUsage"
+    ],
+    "WriteTo": [
+      {
+        "Name": "Async",
+        "Args": {
+          "configure": [
+            {
+              "Name": "RollingFile",
+              "Args": {
+                "pathFormat": "./logs/{Date}.json",
+                "formatter": "Serilog.Formatting.Json.JsonFormatter, Serilog",
+                "fileSizeLimitBytes": 104857600,
+                "retainedFileCountLimit": null
+              }
+            }
+          ]
+        }
+      },
+      {
+        "Name": "ColoredConsole",
+        "Args": {
+          "outputTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Exception}{NewLine}"
+        }
+      }
+    ]
+  },
+  "ElasticSearchSink": {
+    "IsEnabled": true,
+    "CloudId": "project-industries:dXMtZWFzdC0xLmF3cy5mb3VuZC5pbyQ1NzE4OGNjYjIyN2I0MzlkOGY4ZTMyZmI3NDE1NDc1YyQ2ZmZjNTgzOGM3ODU0MTYyYjI5MWIxN2VjY2M2MGU5MQ==",
+    "Login": "logs",
+    "Password": "logs123"
+  }
+}

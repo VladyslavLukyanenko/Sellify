@@ -1,0 +1,17 @@
+<div class="StatsEntry-icon">
+  <ng-content></ng-content>
+</div>
+<div class="StatsEntry-data">
+  <div class="StatsEntry-title">{{title}}</div>
+  <div class="StatsEntry-valueWrap">
+    <div class="StatsEntry-value">{{displayValue}}</div>
+    <div
+      *ngIf="changesPercent != null"
+      class="StatsEntry-changesPercents"
+      [class.is-growing]="changesPercent > 0"
+      [class.is-shrinking]="changesPercent < 0"
+    >
+      {{changesPercent}}%
+    </div>
+  </div>
+</div>

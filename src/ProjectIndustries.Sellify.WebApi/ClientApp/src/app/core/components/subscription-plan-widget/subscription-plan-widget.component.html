@@ -1,0 +1,45 @@
+<div class="SubscriptionPlanWidget-desc">
+  Upgrade to <strong class="SubscriptionPlanWidget-emphasis">Premium</strong> for a better experience
+</div>
+
+<button
+  (click)="isUpgradeDialogVisible = true"
+  class="SubscriptionPlanWidget-upgradeBtn Button is-primary is-condensed is-block"
+>
+  Upgrade
+</button>
+
+
+<p-dialog
+  *ngIf="isUpgradeDialogVisible"
+  [(visible)]="isUpgradeDialogVisible"
+  [modal]="true"
+  [dismissableMask]="true"
+  appendTo="body"
+  styleClass="AppDialog UpgradeDialog dialogHeaderIconless"
+>
+  <ng-template pTemplate="header">
+    <div class="AppDialog-header UpgradeDialog-header">
+      <header class="AppDialog-title UpgradeDialog-title">
+        <div class="UpgradeDialog-plan">Premium plan</div>
+        <div class="UpgradeDialog-price">$29.00/m</div>
+        <div class="UpgradeDialog-help">Billed per month or annually</div>
+      </header>
+    </div>
+  </ng-template>
+  <div class="AppDialog-content UpgradeDialog-content">
+    <ul class="UpgradeDialog-list">
+      <li class="UpgradeDialog-item has-noMarker">Lorem ipsum dolor sit amet</li>
+      <li class="UpgradeDialog-item has-noMarker">Lorem ipsum dolor sit amet</li>
+      <li class="UpgradeDialog-item has-noMarker">Lorem ipsum dolor sit amet</li>
+      <li class="UpgradeDialog-item has-noMarker">Lorem ipsum dolor sit amet</li>
+      <li class="UpgradeDialog-item has-noMarker">Lorem ipsum dolor sit amet</li>
+    </ul>
+  </div>
+
+  <p-footer>
+    <button class="AppDialog-btn is-primary UpgradeDialog-btn">
+      Upgrade Now!
+    </button>
+  </p-footer>
+</p-dialog>

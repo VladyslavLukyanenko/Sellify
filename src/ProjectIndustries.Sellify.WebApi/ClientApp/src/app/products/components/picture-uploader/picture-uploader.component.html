@@ -1,0 +1,21 @@
+<div (drop)="uploadPictures($event)" (dragover)="$event.preventDefault()" class="PictureUploader">
+  <svg class="PictureUploader-icon">
+    <use href="#cloud"></use>
+  </svg>
+  <button (fileSelected)="fileUploaded.emit($event)" appFileUpload class="PictureUploader-btn Button">
+    Choose picture to upload
+  </button>
+  <div class="PictureUploader-desc">
+    or drag and drop it here
+  </div>
+</div>
+
+<svg style="display: none;">
+  <symbol width="89" height="89" viewBox="0 0 89 89" fill="none" id="cloud">
+    <path
+      d="M7.41675 53.7709C7.41675 63.0047 14.8705 70.4584 24.1042 70.4584H68.6042C75.7613 70.4584 81.5834 64.6363 81.5834 57.4792C81.5834 50.3222 75.7613 44.5001 68.6042 44.5001C67.8626 44.5001 67.0838 44.5742 66.3792 44.6855C66.6388 43.4247 66.7501 42.1267 66.7501 40.7917C66.7501 28.5172 56.7747 18.5417 44.5001 18.5417C33.4492 18.5417 24.2897 26.5888 22.5838 37.1576C14.0547 37.9363 7.41675 45.0563 7.41675 53.7709Z"
+      fill="#C7C7C7"/>
+    <path d="M44.5 37.0833V59.3333" stroke="white" stroke-linejoin="round"/>
+    <path d="M44.5001 37.0833L40.7917 40.7916H48.2084L44.5001 37.0833Z" stroke="white" stroke-linecap="round"/>
+  </symbol>
+</svg>

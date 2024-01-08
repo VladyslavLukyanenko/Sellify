@@ -1,0 +1,299 @@
+﻿.AppForm {
+  &-wrap {
+    padding: 35px 0;
+  }
+
+  &-section {
+    margin: 12px 0;
+  }
+
+  &-title {
+    font-size: 13px;
+    font-weight: normal;
+    margin: 0 0 12px;
+  }
+
+  &-row {
+    margin-top: 21px;
+    margin-left: -5px !important;
+    margin-right: -5px !important;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &.has-noGutters {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+
+  &-col {
+    padding: 0 5px !important;
+  }
+
+  &-field {
+    position: relative;
+  }
+
+  &-control {
+    p-radioButton& {
+      .p-radiobutton {
+        box-shadow: none !important;
+      }
+
+      .p-radiobutton .p-radiobutton-box {
+        width: 16px;
+        height: 16px;
+        border-color: #298BFF;
+      }
+
+      .p-radiobutton .p-radiobutton-box.p-highlight {
+        background: transparent;
+      }
+
+      .p-radiobutton-box.p-highlight .p-radiobutton-icon {
+        background: #298BFF;
+        width: 8px;
+        height: 8px;
+      }
+    }
+
+    p-dropdown& {
+      .p-dropdown {
+        background: #fff;
+        border-radius: 3px;
+        width: 100%;
+        height: 34px;
+        border: 1px solid #E9E9E9;
+        box-shadow: none;
+      }
+
+      &.ng-invalid.ng-touched {
+        .p-dropdown {
+          border: 1px solid #f44336;
+        }
+      }
+
+      .p-dropdown-label {
+        padding: 8px 10px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: -0.4px;
+        color: #298BFF;
+      }
+
+      &.is-slim {
+        .p-dropdown {
+          border-radius: 8px;
+          width: auto;
+          height: auto;
+          border: 1px solid transparent;
+          transition: 0.3s box-shadow, 0.3s border;
+          box-shadow: none;
+        }
+
+        .p-dropdown .pi-chevron-down:before {
+          font-size: 9px;
+          color: #D1D1D1;
+        }
+
+        .p-dropdown-label {
+          padding: 4px 13px;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 15px;
+          color: #3A3A5D;
+        }
+      }
+    }
+
+    p-cascadeselect& {
+      .p-cascadeselect {
+        background: #fff;
+        border-radius: 3px;
+        width: 100%;
+        height: 34px;
+        border: 1px solid #E9E9E9;
+        box-shadow: none;
+      }
+
+      &.ng-invalid.ng-touched {
+        .p-cascadeselect {
+          border: 1px solid #f44336;
+        }
+      }
+
+      .p-cascadeselect-label {
+        padding: 8px 10px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: -0.4px;
+        color: #298BFF;
+      }
+
+      &.is-slim {
+        .p-cascadeselect {
+          border-radius: 8px;
+          width: auto;
+          height: auto;
+          border: 1px solid transparent;
+          transition: 0.3s box-shadow, 0.3s border;
+          box-shadow: none;
+        }
+
+        .p-cascadeselect .pi-chevron-down:before {
+          font-size: 7px;
+          color: #D1D1D1;
+        }
+
+        .p-cascadeselect-label {
+          padding: 4px 13px;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 15px;
+          color: #3A3A5D;
+        }
+      }
+    }
+
+    p-calendar& {
+      .p-inputtext {
+        background: #fff;
+        border-radius: 3px;
+        width: 100%;
+        height: 34px;
+        border: 1px solid #E9E9E9;
+        box-shadow: none;
+        padding: 8px 10px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: -0.4px;
+        color: #298BFF;
+      }
+
+      &.ng-invalid.ng-touched {
+        .p-inputtext {
+          border: 1px solid #f44336;
+        }
+      }
+
+      &.is-slim {
+        .p-inputtext {
+          border-radius: 8px;
+          width: auto;
+          height: auto;
+          border: 1px solid transparent;
+          transition: 0.3s box-shadow, 0.3s border;
+          box-shadow: none;
+          padding: 4px 13px;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 15px;
+          color: #3A3A5D;
+        }
+      }
+    }
+
+    input& {
+      border: 1px solid #E9E9E9;
+      height: 34px;
+      width: 100%;
+      background: #fff;
+      border-radius: 3px;
+      padding: 8px 10px;
+      transition: .3s border;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: -0.4px;
+      color: #298BFF;
+
+      &:focus,
+      &:hover {
+        border: 1px solid #298BFF;
+      }
+
+      &[disabled] {
+        opacity: .6;
+      }
+
+      &.ng-invalid.ng-touched {
+        border: 1px solid #f44336;
+      }
+    }
+
+    textarea& {
+      transition: .3s border;
+      background: #fff;
+      border: 1px solid #E9E9E9;
+      box-sizing: border-box;
+      border-radius: 4px;
+      width: 100%;
+      padding: 8px 10px;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: #298BFF;
+      resize: none;
+
+      &[disabled] {
+        opacity: .6;
+      }
+
+      &:focus,
+      &:hover {
+        border: 1px solid #298BFF;
+      }
+
+      &.ng-invalid.ng-touched {
+        border: 1px solid #f44336;
+      }
+    }
+
+    quill-editor& {
+      &[disabled] {
+        & > * {
+          opacity: .6;
+        }
+      }
+
+      &.ng-touched.ng-invalid {
+        .ql-toolbar,
+        .ql-container {
+          border-color: #f44336;
+
+        }
+      }
+    }
+  }
+
+  &-label {
+    display: block;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 15px;
+    color: #999999;
+    margin-bottom: 4px;
+    text-transform: capitalize;
+  }
+
+  &-errorMessage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    transition: .3s opacity, .5s transform;
+    z-index: -1;
+
+    &.is-visible {
+      transform: translateY(100%);
+      opacity: 1;
+      z-index: 0;
+    }
+  }
+}

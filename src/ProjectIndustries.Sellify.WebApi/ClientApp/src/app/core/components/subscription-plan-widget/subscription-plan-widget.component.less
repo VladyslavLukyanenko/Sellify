@@ -1,0 +1,141 @@
+@import "../../../../assets/styles/_mixins.less";
+
+app-subscription-plan-widget {
+  display: block;
+  padding: 48px 19px 17px;
+  background: rgba(41, 138, 255, 0.09);
+  border-radius: 20px;
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: -17px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 55px;
+    width: 55px;
+    background: url(../../../../assets/upgrade-plan.svg) no-repeat center;
+  }
+}
+
+.SubscriptionPlanWidget {
+  &-emphasis,
+  &-desc {
+    font-size: 9px;
+    line-height: 13px;
+    text-align: center;
+    color: #091467;
+    font-style: normal;
+  }
+
+  &-desc {
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  &-upgradeBtn {
+
+  }
+}
+
+
+.UpgradeDialog {
+  width: 300px;
+
+  .p-dialog-header {
+    padding: 21px 33px 0 !important;
+  }
+
+  &-header {
+    border-bottom: 1px solid #F2F2F2;
+    padding-bottom: 8px;
+  }
+
+  &-title {
+    text-transform: lowercase;
+    text-align: center;
+    font-size: 0;
+  }
+
+  &-plan {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: inherit;
+    .text-color-gradient();
+  }
+
+  &-price {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 54px;
+    color: inherit;
+    .text-color-gradient();
+  }
+
+  &-help {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #D7D7D7;
+  }
+
+  &-content {
+    padding: 15px 33px 20px !important;
+    min-height: 0 !important;
+  }
+
+  .p-dialog-content {
+    padding: 0 !important;
+  }
+
+  &-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-item {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 19px;
+    color: #298BFF;
+    padding-left: 35px;
+    position: relative;
+    height: 25px;
+    margin: 10px 0 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background: url(../../../../assets/icons/green-circle-check.svg) center no-repeat;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .p-dialog-footer {
+    padding: 0 33px 28px !important;
+  }
+
+  &-btn {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 12px 0;
+  }
+}

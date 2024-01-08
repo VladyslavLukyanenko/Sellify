@@ -1,0 +1,79 @@
+:host {
+  display: flex;
+  padding: 11px 13px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.StatsEntry {
+  &-icon {
+    background: linear-gradient(180deg, rgba(#298BFF, 0.08) 0%, rgba(#298BFF, 0.08) 100%);
+    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-data {
+    margin-left: 7px;
+    font-size: 0;
+  }
+
+  &-title {
+    font-size: 8px;
+    line-height: 12px;
+    color: #9B9BBA;
+  }
+
+  &-valueWrap {
+    display: flex;
+    align-items: center;
+  }
+
+  &-value {
+    font-size: 25px;
+    line-height: 28px;
+    color: #3A3A5E;
+  }
+
+
+  &-changesPercents {
+    font-size: 11px;
+    line-height: 16px;
+    color: #999;
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      right: -3px;
+      top: 0;
+      transform: translateX(100%);
+      width: 12px;
+      height: 7px;
+    }
+
+    &.is-shrinking {
+      color: #F7658A;
+
+      &:after {
+        background: url(../../../../assets/icons/shrinking.svg) no-repeat center;
+        transform: scaleY(-1) translateX(100%);
+        bottom: 5px;
+        top: auto;
+      }
+    }
+
+    &.is-growing {
+      color: #13B991;
+
+      &:after {
+        background: url(../../../../assets/icons/growing.svg) no-repeat center;
+      }
+    }
+  }
+}

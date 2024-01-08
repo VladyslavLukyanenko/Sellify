@@ -1,0 +1,155 @@
+<form (ngSubmit)="saveProduct()" [formGroup]="form" class="AppForm">
+  <p-dialog
+    *ngIf="isVisible"
+    (visibleChange)="isVisibleChange.emit($event)"
+    [visible]="isVisible"
+    [modal]="true"
+    [dismissableMask]="true"
+    styleClass="AppDialog ProductEditorDialog dialogHeaderIconless"
+  >
+    <!--    appendTo="body"-->
+    <ng-template pTemplate="header">
+      <div class="AppDialog-header">
+        <h2 class="AppDialog-title">
+          New product
+        </h2>
+      </div>
+    </ng-template>
+
+    <div class="AppDialog-content ProductEditorDialog-content">
+      <div class="AppForm-row row">
+        <div class="AppForm-col col-md-9 col-12">
+          <div class="AppForm-field">
+            <label for="productName" class="AppForm-label">Product name</label>
+            <input type="text" formControlName="title" id="productName" class="AppForm-control"
+                   placeholder="Product Name">
+            <app-field-error-required [control]="form.titleCtrl"></app-field-error-required>
+          </div>
+        </div>
+        <div class="AppForm-col col-md-3 col-12">
+          <div class="AppForm-field">
+            <label for="price" class="AppForm-label">Price</label>
+            <input type="text" formControlName="price" id="price" class="AppForm-control" placeholder="Price">
+            <app-field-error-required [control]="form.priceCtrl"></app-field-error-required>
+          </div>
+        </div>
+      </div>
+      <div class="AppForm-row has-noGutters">
+        <label class="AppForm-label">Product excerpt</label>
+        <textarea
+          formControlName="excerpt"
+          id="excerpt"
+          class="AppForm-control"
+          placeholder="Excerpt"
+          rows="3"
+        ></textarea>
+        <app-field-error-required [control]="form.excerptCtrl"></app-field-error-required>
+      </div>
+      <div class="AppForm-row has-noGutters">
+        <div class="AppForm-field ProductEditorDialog-descEditorWrap">
+          <label class="AppForm-label">Product description</label>
+          <quill-editor formControlName="content" class="AppForm-control" classes="ProductEditorDialog-descEditor"></quill-editor>
+          <app-field-error-required [control]="form.contentCtrl"></app-field-error-required>
+        </div>
+      </div>
+      <div class="AppForm-row row">
+        <div class="AppForm-col col-12 col-md-6">
+          <div class="AppForm-field">
+            <label class="AppForm-label">SKU</label>
+            <input type="text" formControlName="sku" id="sku" class="AppForm-control" placeholder="SKU">
+            <app-field-error-required [control]="form.skuCtrl"></app-field-error-required>
+          </div>
+        </div>
+        <div class="AppForm-col col-12 col-md-6">
+          <div class="AppForm-field">
+            <label class="AppForm-label">Stock</label>
+            <input type="text" formControlName="stock" id="stock" class="AppForm-control" placeholder="Stock">
+            <app-field-error-required [control]="form.stockCtrl"></app-field-error-required>
+          </div>
+        </div>
+      </div>
+
+      <div class="AppForm-row row">
+        <div class="AppForm-col col-12 col-md-6">
+          <div class="AppForm-field">
+            <label class="AppForm-label">Categories</label>
+            <p-cascadeSelect
+              appendTo="body"
+              class="AppForm-control"
+              [options]="categories$ | async"
+              optionLabel="name"
+              optionGroupLabel="name"
+              optionValue="id"
+              formControlName="categoryId"
+              [optionGroupChildren]="['children']"
+            ></p-cascadeSelect>
+            <app-field-error-required [control]="form.categoryIdCtrl"></app-field-error-required>
+          </div>
+        </div>
+        <div class="AppForm-col col-12 col-md-6">
+          <div class="AppForm-field">
+            <label class="AppForm-label">Type</label>
+            <p-dropdown
+              appendTo="body"
+              formControlName="type"
+              optionLabel="key"
+              optionValue="value"
+              [autoDisplayFirst]="false"
+              class="AppForm-control"
+              [options]="productTypes"
+            ></p-dropdown>
+            <app-field-error-required [control]="form.typeCtrl"></app-field-error-required>
+          </div>
+        </div>
+      </div>
+
+      <div formArrayName="attributes" class="AppForm-section">
+        <h3 class="AppForm-title">
+          Attributes
+          <button (click)="this.form.addEmptyAttribute()" class="ButtonIcon" type="button">
+            <i class="pi pi-plus"></i>
+          </button>
+        </h3>
+
+        <app-product-attribute-editor
+          *ngFor="let attr of form.attributesCtrl.controls; let idx = index"
+          (removeClick)="form.attributesCtrl.removeAt(idx)"
+          [formGroup]="attr"
+          class="mb-3"
+        ></app-product-attribute-editor>
+
+        <span *ngIf="!form.attributesCtrl.controls.length" class="NoDataAlert">
+          No attributes added yet
+        </span>
+      </div>
+
+      <div class="AppForm-section">
+        <h3 class="AppForm-title">
+          Picture
+        </h3>
+
+        <ng-container *ngIf="((uploadedPic$ | async) || form.pictureCtrl.value) as pic;else uploaderTmpl">
+          <div class="UploadedPictureEditor">
+            <img [src]="pic" class="UploadedPictureEditor-pic">
+            <button (click)="removeUploadedPicture()" class="UploadedPictureEditor-removeBtn ButtonIcon" type="button">
+              <i class="pi pi-trash UploadedPictureEditor-removeIcon"></i>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+      <p-progressSpinner *ngIf="asyncTracker.isLoading$ | async" class="AppProgressSpinner"></p-progressSpinner>
+    </div>
+
+    <p-footer>
+      <button [disabled]="asyncTracker.isLoading$ | async" class="AppDialog-btn is-primary ProductEditorDialog-btn">
+        Create
+      </button>
+    </p-footer>
+  </p-dialog>
+</form>
+<ng-template #uploaderTmpl>
+  <app-picture-uploader
+    (fileUploaded)="uploadPictures($event)"
+  ></app-picture-uploader>
+</ng-template>
+

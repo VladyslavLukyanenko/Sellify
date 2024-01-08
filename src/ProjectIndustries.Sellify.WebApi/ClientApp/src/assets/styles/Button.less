@@ -1,0 +1,69 @@
+﻿.Button {
+  border: 1px solid transparent;
+  background: #aaa;
+  border-radius: 3px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 15px;
+  padding: 8px 11px 9px;
+  cursor: pointer;
+  transition: opacity .3s;
+  vertical-align: middle;
+  text-transform: capitalize;
+  text-decoration: none;
+
+  &.is-primary {
+    background: linear-gradient(180deg, #298BFF 0%, #298BFF 100%);
+    color: #FFFFFF;
+  }
+
+  &.is-primary.is-outlined {
+    border: 1px solid #2650FF;
+    color: #2650FF;
+    background: transparent;
+  }
+
+  &.is-danger {
+    background: #FF0000;
+  }
+
+  &.is-danger.is-outlined {
+    border: 1px solid #FF0000;
+    color: #FF0000;
+    background: transparent;
+  }
+
+  &.is-block {
+    display: block;
+    width: 100%;
+
+    & + & {
+      margin-top: 9px;
+    }
+  }
+
+  &.is-condensed {
+    padding: 7px 10px;
+    border-radius: 6px;
+  }
+
+  &.is-small {
+    padding: 2px 12px;
+    border-radius: 6px;
+    font-weight: 400;
+  }
+
+  &:hover {
+    opacity: .75;
+  }
+
+  &:active,
+  &:focus {
+    opacity: .9;
+  }
+
+  &[disabled] {
+    opacity: .5;
+  }
+}

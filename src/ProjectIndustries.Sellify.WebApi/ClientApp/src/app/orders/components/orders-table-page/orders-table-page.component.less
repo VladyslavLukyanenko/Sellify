@@ -1,0 +1,89 @@
+.Orders {
+  &-filterControls {
+    & > * + * {
+      margin-left: 13px;
+    }
+  }
+
+  &-tableWrap {
+    background: #FFFFFF;
+    box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.01);
+    border-radius: 10px;
+    padding: 12px 14px;
+    height: 100%;
+  }
+}
+
+.OrdersTable {
+  min-width: 900px;
+
+  &-idCol {
+    width: 270px;
+  }
+
+  &-dateCol {
+    width: 160px;
+  }
+
+  &-customerCol {
+    width: 100%;
+  }
+
+  &-productCol {
+    width: 100%;
+  }
+
+  &-totalCol {
+    width: 120px;
+  }
+
+  &-statusCol {
+    width: 100px;
+  }
+}
+
+.OrderDetailsItem {
+  &-title {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.2px;
+    color: #305C8F;
+    margin-bottom: 6px;
+    text-transform: capitalize;
+  }
+
+
+  &-text,
+  &-productTitle,
+  &-productQuantity,
+  &-content {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.2px;
+    color: #298BFF;
+  }
+
+  &-content {
+  }
+
+
+  &-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-listItem {
+    margin-bottom: 5px;
+  }
+
+  &-productTitle {
+    display: inline-block;
+    width: 140px;
+  }
+
+  &-productQuantity {
+    display: inline-block;
+  }
+}

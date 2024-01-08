@@ -1,0 +1,46 @@
+<p-progressSpinner *ngIf="dataSource.isLoading$ | async" class="AppProgressSpinner"></p-progressSpinner>
+<cdk-virtual-scroll-viewport [itemSize]="itemSize" style="height: 100%; min-height: 200px;">
+  <table class="ExpandableTable {{tableClass}}">
+    <tr>
+      <th *ngIf="multiSelect" class="ExpandableTable-header ExpandableTable-checkCol">#</th>
+      <th *ngFor="let d of columns" class="ExpandableTable-header {{d.classes?.headerCol}}">{{d.title}}</th>
+    </tr>
+    <tbody *cdkVirtualFor="let row of dataSource; trackBy: trackBy">
+    <tr (click)="toggleExpandDetails(row)" class="ExpandableTable-dataRow">
+      <td *ngIf="multiSelect" class="ExpandableTable-dataCol">
+        <div class="CheckLike">
+          <svg style="width: 11px; height: 8px;">
+            <use href="#check"></use>
+          </svg>
+        </div>
+      </td>
+      <td *ngFor="let d of columns" class="ExpandableTable-dataCol {{d.classes?.dataCol}}">
+        <ng-container *ngIf="isValueTemplated(d)">
+          <ng-container *ngTemplateOutlet="d.value;context: {$implicit: row}"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="!isValueTemplated(d)">{{extractValue(d, row)}}</ng-container>
+      </td>
+    </tr>
+    <tr class="ExpandableTable-detailsRow">
+      <td [class.is-expanded]="expandedRowTmpl && expandedRow === row" colspan="7" class="ExpandableTable-detailsCol">
+        <div *ngIf="expandedRowTmpl && expandedRow === row" class="ExpandedDetails">
+          <ng-container *ngTemplateOutlet="expandedRowTmpl; context: {$implicit: row}"></ng-container>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="dataSource.noData$ | async" class="NoDataAlert">No data to show</div>
+</cdk-virtual-scroll-viewport>
+
+
+
+<svg style="display: none;">
+  <symbol width="11" height="8" viewBox="0 0 11 8" fill="none" id="check">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M9.32364 0.280462L4.02998 5.45811L1.70714 2.98022C1.31616 2.56315 0.684205 2.56315 0.293231 2.98022C-0.0977436 3.39729 -0.0977436 4.07143 0.293231 4.4885L3.29303 7.68853C3.48702 7.89547 3.744 8 3.99999 8C4.24197 8 4.48395 7.9072 4.67594 7.71946L10.6755 1.85274C11.0825 1.45487 11.1105 0.779666 10.7375 0.345529C10.3646 -0.0886085 9.73161 -0.117409 9.32364 0.280462Z"
+      fill="#E1EFFF"/>
+  </symbol>
+</svg>

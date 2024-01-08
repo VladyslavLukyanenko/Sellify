@@ -1,0 +1,71 @@
+.Customers {
+  &-filterControls {
+    & > * + * {
+      margin-left: 13px;
+    }
+  }
+
+  &-tableWrap {
+    background: #FFFFFF;
+    box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.01);
+    border-radius: 10px;
+    padding: 12px 14px;
+    height: 100%;
+  }
+}
+
+.CustomersTable {
+  min-width: 800px;
+
+  &-nameCol {
+    width: 100%;
+  }
+
+  &-spentCol {
+    width: 160px;
+  }
+
+  &-totalOrdersCol {
+    width: 160px;
+  }
+
+  &-lastPurchaseAtCol {
+    width: 150px;
+  }
+
+  &-actionsCol {
+    width: 100px;
+  }
+}
+
+.CustomerDetailsTable {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  td {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.2px;
+    color: #298BFF;
+    text-align: center;
+    padding-bottom: 12px;
+    width: 100%;
+
+    &:first-child,
+    &:last-child {
+      width: 30%;
+    }
+
+    &:first-child {
+      text-align: left;
+    }
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+}

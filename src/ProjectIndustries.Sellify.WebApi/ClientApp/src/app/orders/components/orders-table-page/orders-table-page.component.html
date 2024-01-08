@@ -1,0 +1,126 @@
+<header class="Page-header">
+  <h1 class="Page-title">Orders</h1>
+
+  <div class="Orders-filters">
+    <div class="Orders-filterControls">
+      <p-dropdown
+        (ngModelChange)="pushStatusToRoute($event)"
+        class="AnalyticsFilters-item AppForm-control is-slim"
+        [options]="orderStatusesFilter"
+        optionLabel="key"
+        appendTo="body"
+        optionValue="value"
+        [ngModel]="ordersDataSource.status$ | async"
+      ></p-dropdown>
+
+      <app-period-picker
+        (startAtChange)="pushStartAt($event)"
+        (periodChange)="pushPeriod($event)"
+        [startAt]="startAt$ | async"
+        [period]="period$ | async"
+      ></app-period-picker>
+    </div>
+  </div>
+</header>
+
+<div class="Orders-content Page-content">
+  <div class="Orders-tableWrap">
+    <app-expandable-table
+      (expandToggled)="toggleDetails($event.expanded, $event.data)"
+      [expandedRowTmpl]="expandRowTmpl"
+      [dataSource]="ordersDataSource"
+      [columns]="columns"
+      itemSize="50"
+      [trackBy]="trackById"
+      tableClass="OrdersTable"
+    ></app-expandable-table>
+  </div>
+</div>
+
+<ng-template #statusColTmpl let-row>
+  <div
+    class="ButtonLike"
+    [class.is-primary]="row.status === orderStatus.Fulfilled"
+    [class.is-warn]="row.status === orderStatus.Pending"
+    [class.is-danger]="row.status === orderStatus.Cancelled"
+  >
+    {{row.status}}
+  </div>
+</ng-template>
+
+<ng-template #toolbarSearchTmpl>
+  <app-search-bar
+    (valueChange)="pushSearchToRoute($event)"
+    [value]="ordersDataSource.search$ | async"
+    placeholder="Search Orders..."
+    class="Toolbar-globalSearch"
+  ></app-search-bar>
+</ng-template>
+
+
+<ng-template #createOrderTmpl>
+  <button class="Button is-primary is-block">Create new order</button>
+</ng-template>
+
+<ng-template #expandRowTmpl let-row>
+  <div *ngIf="details$ | async as details" class="row">
+    <div class="OrderDetailsItem col-4 mb-4">
+      <div class="OrderDetailsItem-title">Order summary</div>
+      <div class="OrderDetailsItem-content">
+        <ul class="OrderDetailsItem-list">
+          <li *ngFor="let p of details.products" class="OrderDetailsItem-listItem">
+            <div class="OrderDetailsItem-productTitle">{{p.productTitle}}</div>
+            <div class="OrderDetailsItem-productQuantity">x{{p.quantity}}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="OrderDetailsItem col-4 mb-4">
+      <div class="OrderDetailsItem-title">Date paid</div>
+      <div [ngSwitch]="row.status" class="OrderDetailsItem-content">
+        <ng-container *ngSwitchCase="orderStatus.Fulfilled">
+          Invoice paid on {{details.paidAt | datetimeHumanize}}
+        </ng-container>
+        <ng-container *ngSwitchCase="orderStatus.Pending">
+          Invoice not paid yet
+        </ng-container>
+        <ng-container *ngSwitchCase="orderStatus.Cancelled">
+          Invoice cancelled
+        </ng-container>
+      </div>
+    </div>
+    <div class="OrderDetailsItem col-4 mb-4">
+      <div class="OrderDetailsItem-title">Total paid</div>
+      <div class="OrderDetailsItem-content">
+        ${{details.totalPrice.toFixed(2)}}
+      </div>
+    </div>
+    <div class="OrderDetailsItem col-4">
+      <div class="OrderDetailsItem-title">Order number</div>
+      <div class="OrderDetailsItem-content">
+        {{row.id}}
+      </div>
+    </div>
+    <div class="OrderDetailsItem col-4">
+      <div class="OrderDetailsItem-title">Purchased country</div>
+      <div class="OrderDetailsItem-content">
+        {{details.purchasedCountry}}
+      </div>
+    </div>
+    <div class="OrderDetailsItem col-4">
+      <div class="OrderDetailsItem-title">Order status</div>
+      <div class="OrderDetailsItem-content">
+        <p-dropdown
+          (ngModelChange)="changeStatus($event, row)"
+          [disabled]="row.status !== orderStatus.Pending"
+          class="AnalyticsFilters-item AppForm-control is-slim"
+          [options]="supportedOrderStatuses"
+          optionLabel="key"
+          appendTo="body"
+          optionValue="value"
+          [ngModel]="row.status"
+        ></p-dropdown>
+      </div>
+    </div>
+  </div>
+</ng-template>

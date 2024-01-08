@@ -1,0 +1,11 @@
+﻿<app-logo class="Sidebar-logo"></app-logo>
+<div
+  *ngIf="layoutService.sidebarExtraSpacePortal$ | async as tmpl"
+  (click)="navigated.emit()"
+  class="Sidebar-extraControlPortal"
+>
+  <ng-container [cdkPortalOutlet]="tmpl"></ng-container>
+</div>
+<app-main-menu (navigated)="navigated.emit()" class="Sidebar-menu">Menu</app-main-menu>
+
+<app-subscription-plan-widget (click)="navigated.emit()" class="Sidebar-upgradePlan"></app-subscription-plan-widget>

@@ -1,0 +1,10 @@
+<form class="SearchBar">
+  <button class="SearchBar-submitSearch"></button>
+  <input
+    type="text"
+    (ngModelChange)="valueChange.emit($event)"
+    [ngModel]="value"
+    [ngModelOptions]="{standalone: true}"
+    [placeholder]="placeholder"
+    class="SearchBar-input">
+</form>

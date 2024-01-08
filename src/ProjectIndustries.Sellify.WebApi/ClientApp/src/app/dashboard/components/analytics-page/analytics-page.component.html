@@ -1,0 +1,125 @@
+<header class="Page-header">
+  <h1 class="Page-title">Dashboard</h1>
+
+  <div class="Dashboard-filters">
+    <div class="Dashboard-filterControls">
+      <app-period-picker
+        (startAtChange)="pushStartAt($event)"
+        (periodChange)="pushPeriod($event)"
+        [startAt]="startAt$ | async"
+        [period]="period$ | async"
+      ></app-period-picker>
+    </div>
+  </div>
+</header>
+
+<div class="Page-content">
+  <div class="row">
+    <div class="col-6 col-lg-3">
+      <app-stats-entry
+        *ngIf="totalOrders$ | async as orders"
+        title="Total Orders"
+        [displayValue]="orders.current"
+        [changesPercent]="orders.changePercents"
+      >
+        <svg style="width: 20px;height: 18px;">
+          <use href="#total-orders"></use>
+        </svg>
+      </app-stats-entry>
+    </div>
+    <div class="col-6 col-lg-3">
+      <app-stats-entry
+        *ngIf="totalRevenue$ | async as revenue"
+        title="Revenue"
+        [displayValue]="'$' + revenue.current"
+        [changesPercent]="revenue.changePercents"
+      >
+        <svg style="width: 13px;height: 22px;">
+          <use href="#revenue"></use>
+        </svg>
+      </app-stats-entry>
+    </div>
+    <div class="col-6 col-lg-3">
+      <app-stats-entry
+        *ngIf="totalCustomers$ | async as customers"
+        title="Total Customers"
+        [displayValue]="customers.current"
+        [changesPercent]="customers.changePercents"
+      >
+        <svg style="width: 22px;height: 22px;">
+          <use href="#total-customers"></use>
+        </svg>
+      </app-stats-entry>
+    </div>
+    <div class="col-6 col-lg-3">
+      <app-stats-entry
+        *ngIf="visitorsCount$ | async as visitorsCount"
+        title="Page Visits"
+        [displayValue]="visitorsCount.current"
+        [changesPercent]="visitorsCount.changePercents"
+      >
+        <svg style="width: 22px;height: 22px;">
+          <use href="#page-visits"></use>
+        </svg>
+      </app-stats-entry>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="Dashboard-card Card">
+        <div class="Card-title">Revenue</div>
+        <div class="Card-content">
+          <echarts
+            [autoResize]="true"
+            [options]="revenueOptions$ | async"
+            style="width: 100%;height: 100%;"
+          ></echarts>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #createProductTmpl>
+  <button class="Button is-primary is-block">Create new product</button>
+</ng-template>
+
+<svg style="display: none">
+
+  <symbol width="20" height="18" viewBox="0 0 20 18" fill="none" id="total-orders">
+    <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M7.45916 0.291687H15.5259C15.5625 0.291687 15.5992 0.291687 15.6359 0.300854C15.7825 0.300854 15.9292 0.31002 16.0759 0.328354V14.4084C16.0759 16.2234 14.6 17.7084 12.7759 17.7084H4.70916C4.67249 17.7084 4.63583 17.7084 4.59916 17.6992C4.45249 17.6992 4.30583 17.69 4.15916 17.6717V3.59169C4.15916 1.77669 5.63499 0.291687 7.45916 0.291687ZM17.1758 5.05846V0.630964C18.6883 1.27263 19.7424 2.7668 19.7424 4.50846C19.7424 4.81096 19.4949 5.05846 19.1924 5.05846H17.1758ZM0.492493 13.4917C0.492493 15.2334 1.54666 16.7275 3.05916 17.3783V12.9417H1.04249C0.739993 12.9417 0.492493 13.1892 0.492493 13.4917ZM7.50499 6.20419H12.73C12.9317 6.20419 13.0967 6.03919 13.0967 5.83752V5.47085C13.0967 5.26919 12.9317 5.10419 12.73 5.10419H7.50499C7.30333 5.10419 7.13833 5.26919 7.13833 5.47085V5.83752C7.13833 6.03919 7.30333 6.20419 7.50499 6.20419ZM7.50499 9.54993H12.73C12.9317 9.54993 13.0967 9.38493 13.0967 9.18326V8.81659C13.0967 8.61493 12.9317 8.44993 12.73 8.44993H7.50499C7.30333 8.44993 7.13833 8.61493 7.13833 8.81659V9.18326C7.13833 9.38493 7.30333 9.54993 7.50499 9.54993ZM12.73 12.8959H7.50499C7.30333 12.8959 7.13833 12.7309 7.13833 12.5292V12.1625C7.13833 11.9609 7.30333 11.7959 7.50499 11.7959H12.73C12.9317 11.7959 13.0967 11.9609 13.0967 12.1625V12.5292C13.0967 12.7309 12.9317 12.8959 12.73 12.8959Z"
+          fill="url(#paint0_linear)"/>
+
+  </symbol>
+
+  <symbol width="13" height="22" viewBox="0 0 13 22" fill="none" id="revenue">
+    <path
+      d="M5.648 21.088H7.184V19.144C10.688 18.904 12.608 16.624 12.608 14.176C12.608 10.624 9.68 9.976 7.184 9.328V4.792C8.12 5.08 8.696 5.8 8.792 6.736H12.416C12.2 3.88 10.184 2.272 7.184 2.032V0.0879989H5.648V2.032C2.528 2.272 0.272 4.12 0.272 6.952C0.272 10.504 3.176 11.2 5.648 11.824V16.408C4.544 16.168 3.968 15.424 3.872 14.32H0.272C0.344 17.2 2.552 18.856 5.648 19.12V21.088ZM9.128 14.32C9.128 15.4 8.408 16.24 7.184 16.456V12.256C8.312 12.64 9.128 13.192 9.128 14.32ZM3.776 6.784C3.776 5.56 4.544 4.888 5.648 4.72V8.872C4.544 8.488 3.776 7.912 3.776 6.784Z"
+      fill="url(#paint0_linear)"/>
+  </symbol>
+
+  <symbol width="22" height="22" viewBox="0 0 22 22" fill="none" id="total-customers">
+    <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M14.6565 10.8166C15.3433 9.86817 15.7666 8.65518 15.7666 7.33331C15.7666 4.29575 14.6666 1.83331 11 1.83331C7.3333 1.83331 6.2333 4.29575 6.2333 7.33331C6.2333 8.65518 6.65662 9.86817 7.34344 10.8166H7.3333C7.3333 10.8166 7.34214 10.8237 7.35841 10.8372C7.63478 11.2152 7.95316 11.5507 8.30332 11.8338C8.53078 12.1509 8.7083 12.504 8.7083 12.8333C8.7083 12.9724 8.69774 13.1115 8.67983 13.2475C7.74546 13.4752 6.70873 13.7629 5.82166 14.0197C4.49521 14.4036 3.5236 15.5248 3.29658 16.8869L2.92786 19.0993C2.83474 19.658 3.26561 20.1666 3.83205 20.1666H18.1678C18.7343 20.1666 19.1652 19.658 19.072 19.0993L18.7034 16.8869C18.4763 15.5248 17.5047 14.4036 16.1783 14.0197C15.2913 13.7629 14.2545 13.4752 13.3201 13.2474C13.3022 13.1115 13.2916 12.9724 13.2916 12.8333C13.2916 12.504 13.4691 12.1509 13.6966 11.8338C14.0468 11.5507 14.3651 11.2152 14.6415 10.8372C14.6577 10.8237 14.6666 10.8166 14.6666 10.8166H14.6565Z"
+          fill="url(#paint0_linear)"/>
+  </symbol>
+
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" id="page-visits">
+    <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M19.8051 10.5091C18.7541 9.16085 15.4872 5.5 11 5.5C6.51285 5.5 3.24596 9.16085 2.19493 10.5091C1.96741 10.801 1.96741 11.199 2.19493 11.4909C3.24596 12.8391 6.51285 16.5 11 16.5C15.4872 16.5 18.7541 12.8391 19.8051 11.4909C20.0327 11.199 20.0327 10.801 19.8051 10.5091ZM13.75 11C13.75 12.5188 12.5188 13.75 11 13.75C9.48127 13.75 8.25002 12.5188 8.25002 11C8.25002 9.48117 9.48127 8.25 11 8.25C12.5188 8.25 13.75 9.48117 13.75 11Z"
+          fill="url(#paint0_linear)"/>
+  </svg>
+</svg>
+
+<svg style="position: fixed;top: -100%;">
+  <defs>
+    <linearGradient id="paint0_linear" x1="10.1175" y1="0.291687" x2="10.1175" y2="17.7084"
+                    gradientUnits="userSpaceOnUse">
+      <stop stop-color="#298BFF"/>
+      <stop offset="1" stop-color="#0074FF"/>
+    </linearGradient>
+  </defs>
+</svg>
